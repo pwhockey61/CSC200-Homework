@@ -1,0 +1,78 @@
+/*Jacob Foster
+ * Professor Cui
+ * CSC 200
+ * April 3, 2018
+ * 
+ * 
+ */
+
+import java.util.Scanner;
+import java.security.SecureRandom;
+
+public class cointoss {
+	
+	private static int headFreq = 0; //int that stores the amount of times landed on heads
+	private static int tailsFreq = 0; // int that stores amount of times landed on tails
+	private static SecureRandom rand = new SecureRandom(); //random number generator
+		
+	public static void main (String[] args) { //main method 
+		Scanner input = new Scanner(System.in); //scanner object
+		System.out.println("Enter 1 to flip the coin or any other number to exit"); //prompts user for input 
+		int runProgram = 0; //sentinal controlled variable to continue the program
+		
+		
+		do { //run code at least once to get out of loop
+			//int toss = rand.nextInt();
+			runProgram = input.nextInt(); //stores sentinal value user input
+			coinToss();//calls method that flips coin
+			System.out.println("Enter 1 to flip the coin or any other number to exit"); //prompts user to exit program or continue 
+			switch(Toss()) { //switch statement for coin toss
+			case 0: //if value of random number is 0
+				headFreq++; // add one to headFreq
+				break;
+			case 1: //if value of random number is 1
+				tailsFreq++;
+				break;
+			default: //breaks program if random number generator does not run as expected
+				break;
+			
+			}
+		
+		
+		
+			}
+		while(runProgram ==1); //senintal controlled iteration
+		
+		System.out.printf("%s%d%s%d\n", "The amount of times you landed on heads:  " , headFreq , " \nThe amount of time you landed on tails: " , tailsFreq);
+	}
+	
+	public static void coinToss() { //method that prints the result of the value
+		//int toss =  1 + rand.nextInt(2);			
+		String heads = "heads"; //prints this string is random number is 0
+		String tails = "tails"; //prints this string if random number is 1
+		
+		
+		switch(Toss()) { //uses Toss method to determine what string to output
+		case 0:
+			System.out.println(heads);
+			break;
+		case 1:
+			System.out.println(tails);
+			break;
+		default:
+			System.out.println("test"); //outputs test to show a probleem in method toss
+			break; 
+		
+		}
+				
+		
+	}
+	
+	public static int Toss() { //method that tosses coin 
+		int toss = rand.nextInt(2); // random number generator from 0-1
+		return toss; //returns value of random number generator 
+		
+		
+	}
+
+}
