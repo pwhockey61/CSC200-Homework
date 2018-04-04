@@ -1,0 +1,52 @@
+ * Jacob Foster
+ * Professor Cui
+ * CSC 200
+ * April 4, 2018
+ * 
+ */
+
+//this program converts average to merits from 1 - 4
+import java.util.Scanner;
+
+
+
+
+public class Unit5bmerit {
+	
+	public static void main (String[] args) { //main method 
+		Scanner input = new Scanner(System.in); //new scanner object
+		System.out.println("Enter your average not including extra credit"); //prompt user to input grade
+		
+		int average = input.nextInt();//set average equal to user input
+		
+		System.out.println("Your merit based score is: " + getMerit(average)); //display merit based score
+		
+	}
+	
+	public static int getMerit(int a) { // method that determines and returns merit value
+		switch(a/10) { // divides user input by 10 to be used in switch case statement
+		case 10://if the score is 90-100, return 4
+		case 9:
+			a = 4;
+			break;
+		case 8: //if the score is 80-89, return 3
+			a = 3;
+			break;
+		case 7: //if the score is 70-79, return 2
+			a =2;
+			break;
+		case 6: //if the score is 60-69, return 1
+			a = 1;
+			break;
+		default: //default value if score is over 100 or under 50
+			a = 0;
+			break;	
+		
+		
+		}
+		
+		return a; //returns value of a based on user input
+		
+	}
+
+}
