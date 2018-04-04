@@ -1,0 +1,35 @@
+
+/*
+ * Jacob Foster
+ * Professor Cui
+ * March 28, 2018
+ * 
+ */
+
+//takes a user input value and displays it inversely
+
+import java.util.Scanner;
+
+public class Unit5bInverse {
+	public static void main (String[] args) {
+		Scanner input = new Scanner(System.in); //scanner object to take user input
+		
+		System.out.println("Enter an integer"); // prompts user for input
+		int regNum = input.nextInt();
+		System.out.println("The inverse of the inputted number is: " + Inverse(regNum)); //displays the reversed number 
+	
+		
+	}
+	
+	public static int Inverse(int a) { //method that inverses a number and returns it
+		
+		int inverseNum = 0; // represents inverse number
+		
+		for(int remainder = a; remainder != 0; remainder/=10) { // run while the remainder does not equal 0
+			inverseNum = inverseNum * 10 + remainder % 10; //changes the number entered to backwards
+			
+		}
+		return inverseNum; //returns reversed number
+		
+	}	
+}
