@@ -1,0 +1,264 @@
+import java.util.Scanner;
+
+/*
+ * Jacob Foster
+ * CSC 200
+ * Yinjin Cui
+ * 2/28/2018
+ * 
+ * 
+ * 
+ * This program calculates amount of income tax is owed based on filing status and amount of income. The program can run as many times as the user wishes, determines the filing status of the user(s), a
+ * which bracket is to be taxed based on the users income, all captured by the user's input when prompted.
+ */
+
+//run program WHILE it is = to number of clients
+//increment program by 1
+//use another counter variable to store value of how many clients
+//what is users filing status
+//conditional statement determines the users filing status
+// if filing single, then use first bracket
+//determine taxablke income for each bracket using logic in delta* variables
+//determine amount of income made by single person
+// determine what tax bracket to use, then determine taxable income
+//repeat for filing jointly, separetly, and head of house hold
+//output tax each client must pay
+
+
+
+public class Unit4project {
+	
+	
+	public static void main (String[] args) {
+		Scanner input = new Scanner(System.in);
+		
+		
+		int numClients = 0; // stores variable for number of clients
+		int counter = 1; // stores variable for client number and increment first while loop
+		int singlecount = 0; // keeps track of clients single filing status
+		int jointcount = 0; // keeps track of how many clients are filing jointly
+		int separatecount = 0; // keeps track of how many clients are filing separately
+		int hohcount = 0; // keeps track of how many clients are filing as head of household
+		double income = 0; // user input income
+		double tax = 0; // variable determined by algorithm on how much tax to take out of income
+		double taxPayed = 0; // stores the value of tax owed by client
+		int counter2 = 0; // increments while loop
+		double income2 = 0; //keeps track of number after calculation
+		
+		
+		System.out.println("Enter number of clients");
+		numClients = input.nextInt(); // determines number of clients 
+		while ( counter2 < numClients ) {
+			System.out.println("client #" + counter );
+			System.out.println("Enter your filing Status ~ 0 for single ~ 1 for married filing jointly ~ 2 for married filing separately ~ 3 for Head of Household client #" + counter);	
+			int switchvar = input.nextInt();
+									
+			switch(switchvar) { // uses user input from variable 
+			
+				case 0:
+					singlecount += 1; // if user input is 0 then adds to single status
+					break;
+				case 1:
+					jointcount += 1; // if user input is 1 it adds to joint status
+					break;
+				case 2:
+					separatecount += 1; // if user input is 2 it adds to separate status
+					break;
+				case 3:
+					hohcount += 1; // if user input is 3 it adds to hoh status
+					break;
+								
+		}
+			if(singlecount >= 1  ) { // condition to run 
+				double delta1 = 8350*.1; //delta variables are used to keep a constant variable of how much to tax, incrementing deltas are replied to respectable bracket above the first
+				double delta2 = (8350 * .1) + (25600 * .15); 
+				double delta3 = (8350 * .1) + (25600 * .15) + (48300 * .25); 
+				double delta4 = (8350 * .1) + (25600 * .15) + (48300 * .25) + (201400 * .28); 
+				double delta5 = (8350 * .1) + (25600 * .15) + (48300 * .25) + (201400 * .28) + (372950 * .33);
+				System.out.println("Enter your taxable income client #" + counter);
+				income = input.nextInt(); // user input
+				if(income <= 8350) { // if income is <= 8350, run code
+					tax = .1;
+					taxPayed = tax * income;
+					
+				}
+				else if (income <= 33950) { // id income is <= 33950, run code
+					//deltaX = 33950 - 8351;
+					income2 = income - 8350;
+					taxPayed = (income2*.15) + delta1;
+					
+				}
+				else if (income <= 82250) {// same logic as above
+					//deltaX = 82250 - 33951;
+					income2 = income - 33950;
+					taxPayed = (income2* .25) + delta2;
+				}
+				else if(income <= 171550) {//8same logic as above
+					income2 = income - 82250;
+					taxPayed = income2 * .28 + delta3;
+				}
+						
+				
+				else if(income <= 372950) { // same logic as above
+					income2 = income - 171550;
+					taxPayed = (.33 * income2) + delta4;
+					
+				}
+				else if(income > 372950) { // same logic as above
+					income2 = income - 372950;
+					taxPayed = delta5 + income2 * .35;
+					
+				}
+					
+				
+				
+			}
+			
+			
+			else if (jointcount >= 1 ) { // same logic used in this block as above
+				double delta6 = 16700 * .1; // add to second bracket
+				double delta7 = 16700 * .1 + 51200 * .15; // add to third bracket
+				double delta8 = 16700 * .1 + 51200 * .15 + 69150 * .25; // add to fourth
+				double delta9 = 16700 * .1 + 51200 * .15 + 69150 * .25 + 71800 * .28; // ad top fifth
+				double delta10 = 16700 * .1 + 51200 * .15 + 69150 * .25 + 71800 * .28 + 164100 * .33; // add to sixth
+				System.out.println("Enter your taxable income client #" + counter);
+				income = input.nextInt();
+				if(income <= 16700)
+					taxPayed = income * .1;
+				else if (income <= 67900) {
+					income2 = income - 16700;
+					taxPayed = delta6 + income2 *.15;
+					
+				}
+					
+				else if (income <= 137050) {
+					income2 = income - 67900;
+					taxPayed = delta7 + income2 * .25;
+					
+				}
+					
+				else if(income <= 208850) {
+					income2 = income - 137050;
+					taxPayed = income2 * .28 + delta8;
+					
+				}
+				
+				else if(income <= 372950) {
+					income2 = income - 208850;
+					taxPayed = income2 * .33 + delta9;
+				}
+					
+				else if(income > 372950) {
+					income2 = income - 372950;
+					taxPayed = income2 * .35 + delta10;;
+				}
+			}
+			
+			
+			else if (separatecount >= 1 ) { // same logic used in this block as above
+				double delta11 = 8350 * .1;
+				double delta12 = 8350 * .1 + 25600 * .15; 
+				double delta13 = 8350 * .1 + 25600 * .15 + 34575 *.25;
+				double delta14 = 8350 * .1 + 25600 * .15 + 34575 *.25 + 35900 * .28;
+				double delta15 = 8350 * .1 + 25600 * .15 + 34575 *.25 + 35900 * .28 + 82050 * .33; 
+				System.out.println("Enter your taxable income client #" + counter);
+				income = input.nextInt();
+				if(income <= 8350)
+					taxPayed = income * .1;
+				else if (income <= 33950) {
+					income2 = income - 8350;
+					taxPayed = income2 * .15 + delta11;
+					
+				}
+					
+				else if (income <= 68525) {
+					income2 = income - 33950;
+					taxPayed = income2 * .25 + delta12;
+					
+				}
+					
+				else if(income <= 104425) {
+					income2 = income - 68525;
+					taxPayed = income2 * .28 + delta13;
+					
+				}
+					
+				else if(income <= 186475) {
+					income2 = income - 104425;
+					taxPayed = income2 * .33 + delta14;
+					
+				}
+					
+				else if(income > 186475) {
+					income2 = income - 186475;
+					taxPayed = income2 * .35 + delta15;
+					
+				}
+					
+			}
+			
+			
+			else if (hohcount >= 1 ) { // same logic as above
+				double delta16 = 11950 * .1;
+				double delta17 = 11950 * .1 + 33550 * .15;
+				double delta18 = 11950 * .1 + 33550 * .15 + 71950 * .25;
+				double delta19 = 11950 * .1 + 33550 * .15 + 71950 * .25 + 72750 * .28;
+				double delta20 = 11950 * .1 + 33550 * .15 + 71950 * .25 + 72750 * .28 + 255500 *.33;
+				System.out.println("Enter your taxable income client #" + counter);
+				income = input.nextInt();
+				if(income <= 11950)
+					taxPayed = income * .1;
+				else if (income <= 45500) {
+					income2 = income - 11950;
+					taxPayed = income2 * .15 + delta16;
+				}
+					
+				else if (income <= 117450) {
+					income2 = income - 45500;
+					taxPayed = income2 * .25 + delta17;
+				}
+					
+				else if(income <= 190200) {
+					income2 = income - 117450;
+					taxPayed = income2 * .28 + delta18;
+				}
+					
+				else if(income <= 372950) {
+					income2 = income - 190200;
+					taxPayed = income2 * .33 + delta19;
+				}
+					
+				else if(income > 372950) {
+					income2 = income - 372950;
+					taxPayed = income2 * .35 + delta20;
+				}
+					
+				
+				
+			}
+			else if (hohcount < 1 && separatecount < 1 && jointcount < 1 && singlecount < 1) // if the user enters unidentifiable input, ask user to try again
+				System.out.println("try again");
+					
+			counter++;
+			counter2++;	
+			//
+			System.out.printf("%s%d%n%s%.2f%n%n" , "Client #" , counter2 , "Tax you have to pay for this client is: $" ,  taxPayed); // output amount of tax  owed
+			if( counter2 > numClients) // kills program when program beats number of clients entered by user
+				break;
+		}
+								
+				
+	}
+}
+
+
+				
+				
+/*
+ * End program
+ */
+			
+		
+
+
+	
